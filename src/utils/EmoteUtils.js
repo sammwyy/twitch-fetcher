@@ -19,6 +19,14 @@ const CDN = {
             medium: `https://cdn.frankerfacez.com/emote/{id}/2`,
             high: `https://cdn.frankerfacez.com/emote/{id}/4`
         }
+    },
+
+    bttv: {
+        v1: {
+            low: `https://cdn.betterttv.net/emote/{id}/1x`,
+            medium: `https://cdn.betterttv.net/emote/{id}/2x`,
+            high: `https://cdn.betterttv.net/emote/{id}/3x`
+        }
     }
 }
 
@@ -70,4 +78,20 @@ export function normalizeFFZEmotes (sets) {
     }
 
     return emotes;
+}
+
+export function normalizeBTTVEmotes(emotes) {
+    let emotesParsed = [];
+
+    for (let emote of emotes) {
+        emotesParsed.push({
+            type: "bttv",
+            id: emote.id,
+            code: emote.code,
+            owner: emote.user ? emote.user.name : "global",
+            cdn: normalizeCDN(emote.id, "bttv")
+        })
+    }
+
+    return emotesParsed;
 }
