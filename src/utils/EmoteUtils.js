@@ -27,6 +27,14 @@ const CDN = {
             medium: `https://cdn.betterttv.net/emote/{id}/2x`,
             high: `https://cdn.betterttv.net/emote/{id}/3x`
         }
+    },
+
+    "7tv": {
+        v1: {
+            low: `https://cdn.7tv.app/emote/{id}/1x`,
+            medium: `https://cdn.7tv.app/emote/{id}/2x`,
+            high: `https://cdn.7tv.app/emote/{id}/4x`
+        }
     }
 }
 
@@ -90,6 +98,22 @@ export function normalizeBTTVEmotes(emotes) {
             code: emote.code,
             owner: emote.user ? emote.user.name : "global",
             cdn: normalizeCDN(emote.id, "bttv")
+        })
+    }
+
+    return emotesParsed;
+}
+
+export function normalize7TVEmotes(emotes) {
+    let emotesParsed = [];
+
+    for (let emote of emotes) {
+        emotesParsed.push({
+            type: "7tv",
+            id: emote.id,
+            code: emote.name,
+            owner: emote.owner_id,
+            cdn: normalizeCDN(emote.id, "7tv")
         })
     }
 

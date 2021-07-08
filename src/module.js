@@ -1,11 +1,13 @@
 import BTTVProvider from "./providers/BTTVProvider";
 import FFZProvider from "./providers/FFZProvider";
 import TwitchProvider from "./providers/twitchProvider";
+import SevenTVProvider from "./providers/STVProvider";
 
 class TwitchFetcher {
     constructor (config = {}) {
         this.bttvProvider = new BTTVProvider();
         this.ffzProvider = new FFZProvider();
+        this.stvProvider = new SevenTVProvider();
         this.twitchProvider = new TwitchProvider(config.twitchClientID, config.twitchOAuth);
     }
 
@@ -17,19 +19,24 @@ class TwitchFetcher {
         }
     }
 
-    async getEmotesByID (id, {twitch, bttv, ffz, stv} = { twitch: true }) {
+    async getEmotesByID (id, config = { twitch: true }) {
         let result = [];
         
-        if (twitch) {
+        if (config.twitch) {
             result = [...result, ...await this.twitchProvider.getEmotesByID(id)];
         }
 
-        if (ffz) {
+        if (config.ffz) {
             result = [...result, ...await this.ffzProvider.getEmotesByID(id)];
         }
 
-        if (bttv) {
+        if (config.bttv) {
             result = [...result, ...await this.bttvProvider.getEmotesByID(id)];
+        }
+
+        if (config["7tv"]) {
+            let userdata = await this.getUserData({id});
+            result = [...result, ...await this.stvProvider.getEmotesByName(userdata.login)];
         }
 
         return result;
