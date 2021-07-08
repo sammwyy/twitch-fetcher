@@ -9,6 +9,14 @@ class TwitchFetcher {
         this.twitchProvider = new TwitchProvider(config.twitchClientID, config.twitchOAuth);
     }
 
+    async getUserData ({id, username}) {
+        if (username) {
+            return this.twitchProvider.getUserByName(username);
+        } else {
+            return this.twitchProvider.getUserByID(id);
+        }
+    }
+
     async getEmotesByID (id, {twitch, bttv, ffz, stv} = { twitch: true }) {
         let result = [];
         
@@ -25,6 +33,11 @@ class TwitchFetcher {
         }
 
         return result;
+    }
+
+    async getEmotesByName (username, settings) {
+        const { id } = await this.getUserData({username});
+        return this.getEmotesByID(id, settings);
     }
 }
 

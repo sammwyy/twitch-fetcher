@@ -34,4 +34,14 @@ export default class TwitchProvider {
         let emotes = await this.sendGetRequest("https://api.twitch.tv/helix/chat/emotes?broadcaster_id=" + id);
         return normalizeTwitchEmotes(emotes);
     }
+
+    async getUserByID (id) {
+        let user = await this.sendGetRequest("https://api.twitch.tv/helix/users?id=" + id);
+        return user[0];
+    }
+
+    async getUserByName (username) {
+        let user = await this.sendGetRequest("https://api.twitch.tv/helix/users?login=" + username);
+        return user[0];
+    }
 }
