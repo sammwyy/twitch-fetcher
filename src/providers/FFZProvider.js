@@ -1,7 +1,7 @@
 import { normalizeFFZEmotes } from "../utils/EmoteUtils";
 import fetch from "node-fetch";
 
-export default class TwitchProvider {
+export default class FFZProvider {
     async sendGetRequest (url) {
         let req = await fetch(url);
         let body = await req.json();
