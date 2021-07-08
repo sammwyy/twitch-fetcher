@@ -11,6 +11,14 @@ const CDN = {
             medium: `https://static-cdn.jtvnw.net/emoticons/v2/{id}/default/dark/2.0`,
             high: `https://static-cdn.jtvnw.net/emoticons/v2/{id}/default/dark/3.0`,
         }
+    },
+
+    ffz: {
+        v1: {
+            low: `https://cdn.frankerfacez.com/emote/{id}/1`,
+            medium: `https://cdn.frankerfacez.com/emote/{id}/2`,
+            high: `https://cdn.frankerfacez.com/emote/{id}/4`
+        }
     }
 }
 
@@ -42,4 +50,24 @@ export function normalizeTwitchEmotes (emotes) {
     }
 
     return emotesParsed;
+}
+
+export function normalizeFFZEmotes (sets) {
+    let emotes = [];
+    let setIds = Object.keys(sets || {});
+
+    for (let setId of setIds) {
+        let { emoticons } = sets[setId];
+        for (let emote of emoticons) {
+            emotes.push({
+                type: "ffz",
+                id: emote.id,
+                code: emote.name,
+                owner: emote.owner.name,
+                cdn: normalizeCDN(emote.id + "", "ffz")
+            });
+        }
+    }
+
+    return emotes;
 }

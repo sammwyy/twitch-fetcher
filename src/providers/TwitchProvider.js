@@ -2,18 +2,18 @@ import { normalizeTwitchEmotes } from "../utils/EmoteUtils";
 import fetch from "node-fetch";
 
 export default class TwitchProvider {
-    constructor ({ twitchClientID, twitchOAuth }) {
-        this.clientID = twitchClientID;
+    constructor (clientID, twitchOAuth) {
+        this.clientID = clientID;
         this.oauth = twitchOAuth;
+    }
 
+    async sendGetRequest (url) {
         if (this.clientID == null) {
             throw new Error("Twitch Client ID cannot be null.");
         } else if (this.oauth == null) {
             throw new Error("Twitch OAuth cannot be null.")
         }
-    }
-
-    async sendGetRequest (url) {
+        
         let req = await fetch(url, {
             headers: {
                 "Client-ID": this.clientID,
