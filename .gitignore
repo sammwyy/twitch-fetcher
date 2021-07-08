@@ -1,0 +1,8 @@
+# Ignore node modules
+node_modules
+
+# Ignore secret file
+testing.env
+
+# Ignore error log
+yarn-error.log
