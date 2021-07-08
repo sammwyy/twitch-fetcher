@@ -5,11 +5,11 @@ class TwitchFetcher {
         this.twitchProvider = new TwitchProvider(config);
     }
 
-    async getEmotesByID (id, { twitch = true, bttv = false, ffz = false, stv = false }) {
+    async getEmotesByID (id, {twitch, bttv, ffz, stv} = { twitch: true }) {
         let result = [];
         
         if (twitch) {
-            result = [...result, await this.twitchProvider.getEmotesByID(id)];
+            result = [...result, ...await this.twitchProvider.getEmotesByID(id)];
         }
 
         return result;

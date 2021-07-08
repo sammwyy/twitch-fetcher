@@ -5,12 +5,18 @@ export default class TwitchProvider {
     constructor ({ twitchClientID, twitchOAuth }) {
         this.clientID = twitchClientID;
         this.oauth = twitchOAuth;
+
+        if (this.clientID == null) {
+            throw new Error("Twitch Client ID cannot be null.");
+        } else if (this.oauth == null) {
+            throw new Error("Twitch OAuth cannot be null.")
+        }
     }
 
     async sendGetRequest (url) {
         let req = await fetch(url, {
             headers: {
-                "Client-ID": this.twitchClientID,
+                "Client-ID": this.clientID,
                 "Authorization": "Bearer " + this.oauth
             }
         });
@@ -18,7 +24,7 @@ export default class TwitchProvider {
         let body = await req.json();
 
         if (req.ok) {
-            return body;
+            return body.data;
         } else {
             throw new Error(`${body.status} ${body.error} - ${body.message}`);
         }

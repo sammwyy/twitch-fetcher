@@ -5,7 +5,7 @@ const fetcher = new TwitchFetcher({
     twitchOAuth: process.env.TWITCH_OAUTH
 });
 
-test('Get emotes by ID', async () => {
-    const emotes = await fetcher.getEmotesByID("123456", { twitch: true });
-    expect(emotes.length).toBe(3);
+test('Get Twitch emotes by ID', async () => {
+    const emotes = await fetcher.getEmotesByID("39276140", { twitch: true });
+    expect(emotes.length).not.toBe(0);
 });
