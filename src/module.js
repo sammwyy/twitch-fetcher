@@ -12,6 +12,10 @@ class TwitchFetcher {
     }
 
     async getUserData ({id, username}) {
+        if (username == null && id == null) {
+            throw new Error("You must specify an ID or Username.");
+        }
+
         if (username) {
             return this.twitchProvider.getUserByName(username);
         } else {
@@ -20,6 +24,10 @@ class TwitchFetcher {
     }
 
     async getEmotesByID (id, config = { twitch: true }) {
+        if (id == null) {
+            throw new Error("You must specify an ID.");
+        }
+
         let result = [];
         
         if (config.twitch) {
@@ -43,8 +51,16 @@ class TwitchFetcher {
     }
 
     async getEmotesByName (username, settings) {
-        const { id } = await this.getUserData({username});
-        return this.getEmotesByID(id, settings);
+        if (username == null) {
+            throw new Error("You must specify an Username.");
+        }
+
+        const data = await this.getUserData({username});
+        if (data == null) {
+            throw new Error("Couldn't fetch this user.");
+        }
+
+        return this.getEmotesByID(data.id, settings);
     }
 }
 
