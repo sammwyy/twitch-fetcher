@@ -1,6 +1,6 @@
 import BTTVProvider from "./providers/BTTVProvider";
 import FFZProvider from "./providers/FFZProvider";
-import TwitchProvider from "./providers/twitchProvider";
+import TwitchProvider from "./providers/TwitchProvider";
 import SevenTVProvider from "./providers/STVProvider";
 
 class TwitchFetcher {
