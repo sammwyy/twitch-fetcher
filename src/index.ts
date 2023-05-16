@@ -31,7 +31,7 @@ export default class TwitchFetcher {
     const emotes: Emote[] = [];
 
     if (providers.includes('7tv')) {
-      const providerEmotes = await SevenTV.getEmotes(userId);
+      const providerEmotes = await SevenTV.getEmotes(userId).catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
         id: emote.id,
@@ -47,7 +47,7 @@ export default class TwitchFetcher {
     }
 
     if (providers.includes('bttv')) {
-      const providerEmotes = await BetterTTV.getUserEmotes(userId);
+      const providerEmotes = await BetterTTV.getUserEmotes(userId).catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.code,
         id: emote.id,
@@ -59,7 +59,7 @@ export default class TwitchFetcher {
     }
 
     if (providers.includes('ffz')) {
-      const providerEmotes = await FFZ.getUserEmotes(userId);
+      const providerEmotes = await FFZ.getUserEmotes(userId).catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
         id: emote.id + "",
@@ -75,7 +75,7 @@ export default class TwitchFetcher {
     }
 
     if (providers.includes('twitch')) {
-      const providerEmotes = await this.twitch.chat.getEmotes(userId);
+      const providerEmotes = await this.twitch.chat.getEmotes(userId).catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
         id: emote.id,
