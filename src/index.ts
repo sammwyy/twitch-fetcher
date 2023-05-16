@@ -46,7 +46,7 @@ export default class TwitchFetcher {
       emotes.push(...fixedEmotes);
     }
 
-    else if (providers.includes('bttv')) {
+    if (providers.includes('bttv')) {
       const providerEmotes = await BetterTTV.getUserEmotes(userId);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.code,
@@ -58,7 +58,7 @@ export default class TwitchFetcher {
       emotes.push(...fixedEmotes);
     }
 
-    else if (providers.includes('ffz')) {
+    if (providers.includes('ffz')) {
       const providerEmotes = await FFZ.getUserEmotes(userId);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
@@ -73,6 +73,23 @@ export default class TwitchFetcher {
       }));
       emotes.push(...fixedEmotes);
     }
+
+    if (providers.includes('twitch')) {
+      const providerEmotes = await this.twitch.chat.getEmotes(userId);
+      const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
+        code: emote.name,
+        id: emote.id,
+        owner: "@", 
+        type: 'twitch',
+        url: {
+          low: emote.images.url_1x,
+          mid: emote.images.url_2x,
+          high: emote.images.url_3x
+        },
+      }));
+      emotes.push(...fixedEmotes);
+    }
+
 
     return emotes;
   }

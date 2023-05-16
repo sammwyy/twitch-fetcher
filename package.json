@@ -27,7 +27,7 @@
     "7tv": "0.1.2",
     "betterttv": "^0.1.2",
     "frankerfacez": "^0.1.1",
-    "twitch-api-ts": "^0.1.0"
+    "twitch-api-ts": "0.1.1"
   },
   "devDependencies": {
     "@types/jest": "29.2.4",

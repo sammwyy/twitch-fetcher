@@ -13,9 +13,10 @@ test('Fetch User Emotes by ID', async () => {
   const emotes = await fetcher.getEmotes("280803646", ["7tv", "bttv", "ffz", "twitch"]);
   
   expect(emotes.length).toBeGreaterThanOrEqual(500);
-  expect(emotes.find((v) => v.code == "PETTHESAMMWY")).not.toBeNull();
-  expect(emotes.find((v) => v.code == "uwu")).not.toBeNull();
-  expect(emotes.find((v) => v.code == "uwu")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "uwu" && v.type == "7tv")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "PETTHESAMMWY" && v.type == "bttv")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "WideHardo" && v.type == "ffz")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "sammwyComfy" && v.type == "twitch")).not.toBeNull();
 });
 
 test('Fetch User Emotes by Username', async () => {
@@ -29,7 +30,8 @@ test('Fetch User Emotes by Username', async () => {
   const emotes = await fetcher.getEmotesByUsername("sammwy", ["7tv", "bttv", "ffz", "twitch"]);
   
   expect(emotes.length).toBeGreaterThanOrEqual(500);
-  expect(emotes.find((v) => v.code == "PETTHESAMMWY")).not.toBeNull();
-  expect(emotes.find((v) => v.code == "uwu")).not.toBeNull();
-  expect(emotes.find((v) => v.code == "uwu")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "uwu" && v.type == "7tv")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "PETTHESAMMWY" && v.type == "bttv")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "WideHardo" && v.type == "ffz")).not.toBeNull();
+  expect(emotes.find((v) => v.code == "sammwyComfy" && v.type == "twitch")).not.toBeNull();
 });
