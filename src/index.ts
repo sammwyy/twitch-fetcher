@@ -103,4 +103,14 @@ export default class TwitchFetcher {
     });
     return await this.getEmotes(user.id, providers);
   }
+
+  async getChannel(id: string) {
+    const user = await this.twitch.users.getUser({id});
+    return user;
+  }
+
+  async getChannelByUsername(login: string) {
+    const user = await this.twitch.users.getUser({login});
+    return user;
+  }
 }
