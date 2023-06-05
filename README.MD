@@ -4,11 +4,10 @@ Fetch for Twitch channel and Emotes. (Includes BTTV, FFZ and 7TV)
 
 ## ⭐ Features
 
-- Fetch for Twitch channel
-- Fetch for Twitch emotes  
-- Fetch for BetterTTV emotes.
-- Fetch for FFZ emotes.
 - Fetch for 7TV emotes.
+- Fetch for Twitch emotes.
+- Fetch for BetterTTV emotes.
+- Fetch for FrankerFaceZ emotes.
 
 ## 🌲 Get started
 
@@ -17,9 +16,11 @@ Fetch for Twitch channel and Emotes. (Includes BTTV, FFZ and 7TV)
 ```javascript
 const TwitchFetcher = require("twitch-fetcher");
 
-var fetcher = new TwitchFetcher({
-    clientId: "01234abcde",
-    OAuth: "56789fghij"
+const fetcher = new TwitchFetcher({
+    auth: {
+        accessToken: "01234abcde",
+        clientId: "01234abcde"
+    }
 });
 ```
 
@@ -28,9 +29,11 @@ var fetcher = new TwitchFetcher({
 ```javascript
 import TwitchFetcher from "twitch-fetcher";
 
-let fetcher = new TwitchFetcher({
-    clientId: "01234abcde",
-    OAuth: "56789fghij"
+const fetcher = new TwitchFetcher({
+    auth: {
+        accessToken: "01234abcde",
+        clientId: "01234abcde"
+    }
 });
 ```
 
@@ -40,21 +43,7 @@ let fetcher = new TwitchFetcher({
 
 ```javascript
 // By username
-await fetcher.getEmotesByName("sammwy", ["7tv", "bttv", "ffz", "twitch"]);
-
-// By ID
-await fetcher.getEmotesByID("0123456abcdefg", ["twitch"]);
-
-```
-
-**__Fetch Twitch User__**  
-
-```javascript
-// By username
-await fetcher.getUserData({username: "sammwy"});
-
-// By ID
-await fetcher.getUserData({id: "0123456abcdefg"});
+await fetcher.getEmotesByUsername("sammwy", ["7tv", "bttv", "ffz", "twitch"]);
 ```
 
 ## ❤️
