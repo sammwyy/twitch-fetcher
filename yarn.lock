@@ -3025,10 +3025,10 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-twitch-api-ts@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/twitch-api-ts/-/twitch-api-ts-0.1.1.tgz#19de8a28dad7ab67daa73bc6ce610421f94deaa2"
-  integrity sha512-83RYSQEVbf5nLLeWzNTc/EJFKcLWfiI1v73iomtlx8FzC8ZLnIcLM5VDFVwukIniKvo9dwx4DKLV4STd2b2LXA==
+twitch-api-ts@0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/twitch-api-ts/-/twitch-api-ts-0.1.2.tgz#869411f6362f4c1f41e3cb425a1a940ae45e7cd7"
+  integrity sha512-BZf0M7PObU/wyy6heI1O4f5/RaajytNynj4R6eg8DeIlNoUEYi9pvgaeJITIdKS/b39HPGIUjHFC27PBRZo/Fw==
   dependencies:
     isomorphic-unfetch "^3.1.0"
 
