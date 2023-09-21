@@ -35,8 +35,8 @@ export default class TwitchFetcher {
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
         id: emote.id,
-        owner: emote.data.owner.username,
-        type: '7tv',
+        owner: emote.data.owner?.username,
+        type: '7tv' as Provider,
         url: {
           low: `${emote.data.host.url}/${emote.data.host.files[0].name}`,
           mid: `${emote.data.host.url}/${emote.data.host.files[1].name}`,
@@ -47,12 +47,14 @@ export default class TwitchFetcher {
     }
 
     if (providers.includes('bttv')) {
-      const providerEmotes = await BetterTTV.getUserEmotes(userId).catch(() => []);
+      const providerEmotes = await BetterTTV.getUserEmotes(userId).catch(
+        () => [],
+      );
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.code,
         id: emote.id,
-        owner: emote.user?.displayName || emote.userId || "unknown",
-        type: 'bttv',
+        owner: emote.user?.displayName || emote.userId || 'unknown',
+        type: 'bttv' as Provider,
         url: emote.src,
       }));
       emotes.push(...fixedEmotes);
@@ -62,34 +64,35 @@ export default class TwitchFetcher {
       const providerEmotes = await FFZ.getUserEmotes(userId).catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
-        id: emote.id + "",
-        owner: emote.owner.display_name, 
-        type: 'ffz',
+        id: emote.id + '',
+        owner: emote.owner.display_name,
+        type: 'ffz' as Provider,
         url: {
           low: emote.urls[1],
           mid: emote.urls[2],
-          high: emote.urls[4]
+          high: emote.urls[4],
         },
       }));
       emotes.push(...fixedEmotes);
     }
 
     if (providers.includes('twitch')) {
-      const providerEmotes = await this.twitch.chat.getEmotes(userId).catch(() => []);
+      const providerEmotes = await this.twitch.chat
+        .getEmotes(userId)
+        .catch(() => []);
       const fixedEmotes: Emote[] = providerEmotes.map((emote) => ({
         code: emote.name,
         id: emote.id,
-        owner: "@", 
-        type: 'twitch',
+        owner: '@',
+        type: 'twitch' as Provider,
         url: {
           low: emote.images.url_1x,
           mid: emote.images.url_2x,
-          high: emote.images.url_3x
+          high: emote.images.url_3x,
         },
       }));
       emotes.push(...fixedEmotes);
     }
-
 
     return emotes;
   }
@@ -99,18 +102,18 @@ export default class TwitchFetcher {
     providers: Provider[] = ['twitch'],
   ): Promise<Emote[]> {
     const user = await this.twitch.users.getUser({
-      login: username
+      login: username,
     });
     return await this.getEmotes(user.id, providers);
   }
 
   async getChannel(id: string) {
-    const user = await this.twitch.users.getUser({id});
+    const user = await this.twitch.users.getUser({ id });
     return user;
   }
 
   async getChannelByUsername(login: string) {
-    const user = await this.twitch.users.getUser({login});
+    const user = await this.twitch.users.getUser({ login });
     return user;
   }
 }
