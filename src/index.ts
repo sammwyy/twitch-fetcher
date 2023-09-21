@@ -36,7 +36,7 @@ export default class TwitchFetcher {
         code: emote.name,
         id: emote.id,
         owner: emote.data.owner?.username,
-        type: '7tv' as Provider,
+        type: '7tv',
         url: {
           low: `${emote.data.host.url}/${emote.data.host.files[0].name}`,
           mid: `${emote.data.host.url}/${emote.data.host.files[1].name}`,
